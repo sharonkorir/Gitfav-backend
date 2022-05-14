@@ -12,9 +12,3 @@ class Repo(models.Model):
     def __str__(self):
         return self.name
 
-class Profile(models.Model):
-    username = models.CharField(max_length=120)
-    gh_username = models.CharField(max_length=120)
-    email = models.EmailField
-    bio = models.TextField()
-    profile_pic_path = models.URLField()

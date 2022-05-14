@@ -12,3 +12,12 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+class Profile(models.Model):
+    user = models.OneToOneField(
+        User, related_name='profile', on_delete=models.CASCADE)
+    username = models.CharField(max_length=120)
+    gh_username = models.CharField(max_length=120)
+    email = models.EmailField
+    bio = models.TextField()
+    profile_pic_path = models.URLField()
+

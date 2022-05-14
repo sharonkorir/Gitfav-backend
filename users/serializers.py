@@ -6,7 +6,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id','full_name', 'email', 'password',]
         extra_kwargs = {
-          'password': {'write_only':True},
+          'password': {'write_only':True}
         }
 
     #hide password in JSON
@@ -16,8 +16,8 @@ class UserSerializer(serializers.ModelSerializer):
         
         if password is not None:
             instance.set_password(password)
-            instance.save()
-            return instance
+        instance.save()
+        return instance
           
 
     
