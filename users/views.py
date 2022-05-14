@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from users.models import Profile, User
-from users.serializers import UserSerializer
+from users.serializers import ProfileSerializer, UserSerializer
 from rest_framework.exceptions import AuthenticationFailed
 import jwt, datetime
 
@@ -47,7 +47,7 @@ class LoginView(APIView):
 
         return response
 
-class ProfileView(APIView):
+class UserView(APIView):
     def get(self, request):
         token = request.COOKIES.get('jwt')
 
@@ -62,9 +62,12 @@ class ProfileView(APIView):
 
         user = User.objects.filter(id=payload['id']).first()
         serializer = UserSerializer(user)
-        profile = Profile.objects.filter(user=payload['id'])
+        # profile = Profile.objects.filter(user=payload['id'])
+        # serializer = ProfileSerializer(profile)
 
-        return Response(serializer.data)
+        return Response(
+          serializer.data
+          )
 
 class LogoutView(APIView):
     def post(self,request):

@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os, django_heroku
 from pathlib import Path
 from decouple import config
 
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-5s^j)**q+=m53mofh6)vknz%+zv*@4f#f!cbj(!rt+u6p7bt++
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['git-fav.herokuapp.com']
 
 
 # Application definition
@@ -85,9 +86,14 @@ WSGI_APPLICATION = 'git_fav.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gitfav',
-        'USER': 'sharon',
-        'PASSWORD': '12345678'
+        # 'NAME': 'gitfav',
+        # 'USER': 'sharon',
+        # 'PASSWORD': '12345678'
+        'NAME': 'davvcghv1ah0n7',
+        'USER': 'pkjxgwlwymokse',
+        'PASSWORD': '4177f1de8975f5a338e37a2737a3a93f1610ed9215d4a343db222a09fa173448',
+        'HOST': 'ec2-176-34-211-0.eu-west-1.compute.amazonaws.com',
+        'PORT' : 5432
     }
 }
 
@@ -128,6 +134,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+django_heroku.settings(locals())
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -155,5 +168,9 @@ AUTH_USER_MODEL = 'users.User'
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200"
+]
+
+CSRF_TRUSTED_ORIGINS = [
     "http://localhost:4200"
 ]
