@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'users',
     'repos',
     'social_django',  #added socials
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -81,8 +82,10 @@ WSGI_APPLICATION = 'git_fav.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'gitfav',
+        'USER': 'sharon',
+        'PASSWORD': '12345678'
     }
 }
 
@@ -144,3 +147,5 @@ LOGOUT_REDIRECT_URL = 'login'
 
 SOCIAL_AUTH_GITHUB_KEY = config('SOCIAL_AUTH_GITHUB_KEY')
 SOCIAL_AUTH_GITHUB_SECRET = config('SOCIAL_AUTH_GITHUB_SECRET')
+
+AUTH_USER_MODEL = 'users.User'
